@@ -1,0 +1,99 @@
+.previewMainContainer {
+  height: 370px;
+  overflow: hidden;
+  width: 260px;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+  background-color: black;
+  border: 1px solid #000;
+  transition: 0.5s ease-in-out;
+}
+.previewMainContainer:hover {
+  border: 1px solid #ff4d15;
+  transition: 2s ease-in-out;
+  box-shadow: #ff4d15 0 0 10px;
+}
+.cardImageStyle {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+}
+.cardTextContainer {
+  height: 110px;
+  overflow: hidden;
+  padding: 10px;
+  text-decoration: underline #000;
+}
+.cardFalsePrice {
+  color: #aaa;
+  text-decoration: line-through;
+  font-size: 10px;
+  margin-left: 10px;
+}
+.cardDiscountText {
+  color: #306b68;
+  font-size: 10px;
+  margin-left: 10px;
+}
+.cardHeadingText {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0px;
+}
+.cardTruePriceText {
+  color: #fff;
+  font-weight: 500;
+  bottom: 0px;
+  color: "#fff";
+}
+.cardPriceText {
+  display: flex;
+  align-items: center;
+  margin-top: -10px;
+}
+.cardDescriptionText {
+  color: #fff;
+  font-size: 14px;
+  margin: 0px;
+}
+@media only screen and (max-width: 1200px) {
+  .previewMainContainer {
+    height: 350px;
+    width: 250px;
+  }
+  .cardImageStyle {
+    height: 250px;
+    width: 250px;
+  }
+  .cardTextContainer {
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .previewMainContainer {
+    height: 300px;
+    width: 200px;
+  }
+  .cardImageStyle {
+    height: 200px;
+    width: 200px;
+  }
+  .cardHeadingText {
+    font-size: 16px;
+  }
+  .cardDescriptionText,
+  .cardPriceText {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 940px) {
+  .previewMainContainer {
+    height: 65vw;
+    width: 45vw;
+  }
+  .cardImageStyle {
+    height: 45vw;
+    width: 45vw;
+  }
+}

@@ -1,0 +1,584 @@
+@import url("https://fonts.googleapis.com/css?family=Inter");
+
+.huemntextbutton {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ffffff;
+}
+
+.huemntextbutton2 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #fff;
+}
+
+.huemntextbutton3 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #2b8ec9;
+  padding: 0px;
+  margin: 0px;
+}
+
+.textcutomize1 {
+  font-size: 18px;
+  padding: 10px 10px;
+  max-width: 220px;
+  font-weight: 100;
+  color: white;
+  font-family: "Inter";
+}
+.textlogo {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  font-family: "Inter";
+}
+.textcontent3 {
+  font-size: 14px;
+  padding-left: 10px;
+  padding-top: 8px;
+  max-width: 260px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 24px;
+  display: flex;
+  align-items: flex-end;
+  letter-spacing: 0.25px;
+  color: #7c828d;
+}
+
+.huemntextheading2 {
+  padding: 0px;
+  margin: 0px;
+  padding-bottom: 16px;
+  max-width: 520px;
+  font-weight: bold;
+  color: #292d34;
+  font-family: "Inter";
+  letter-spacing: -0.2px;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.huemntextheading1 {
+  font-size: 50px;
+  margin: 0px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  padding: 0px;
+  max-width: 520px;
+  font-weight: 800;
+  line-height: 69px;
+  color: #292d34;
+  font-family: "Inter";
+}
+
+.huemntextheading3 {
+  font-size: 50px;
+  margin: 0px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  padding: 0px;
+  max-width: 720px;
+  font-weight: 800;
+  line-height: 69px;
+  color: #292d34;
+  font-family: "Inter";
+}
+
+.huemntextheading4 {
+  margin-bottom: 24px;
+  margin: 0px;
+  padding: 0px;
+  max-width: 600px;
+  font-weight: bold;
+  font-family: "Inter";
+
+  text-align: center;
+
+  font-size: 40px;
+  line-height: 56px;
+
+  text-align: center;
+  letter-spacing: -0.2px;
+
+  color: #ffffff;
+}
+
+.huemntextheading5 {
+  margin-bottom: 24px;
+  font-size: 40px;
+  margin: 0px;
+  padding: 0px;
+  max-width: 920px;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  line-height: 56px;
+  text-align: center;
+}
+
+.huemntextheading {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 0px 0px 0px 10px;
+  max-width: 216px;
+  font-family: "Inter";
+  font-style: normal;
+  line-height: 35px;
+  letter-spacing: 0.25px;
+
+  color: #292d34;
+}
+
+.textcontent {
+  max-width: 500px;
+  font-style: normal;
+  font-family: "Inter";
+  margin: 0px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 32px;
+  text-transform: uppercase;
+  color: #2b8ec9;
+}
+
+.huemnhometextcontent {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 32px;
+  text-transform: uppercase;
+  color: #2b8ec9;
+}
+
+.huemnhometextsubheading {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.2px;
+  color: #292d34;
+  margin: 0px;
+}
+
+.huemnhometextcontent2 {
+  max-width: 530px;
+  font-size: 18px;
+  color: #7c828d;
+  font-family: "Inter";
+  line-height: 29px;
+  font-style: normal;
+  font-weight: normal;
+  margin: 0px;
+}
+
+.huemnhometextcontent3 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.huemnhometextcontent4 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+  padding: 0px;
+  margin: 0px;
+}
+
+.huemnhomebuttontext {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  color: #292d34;
+}
+
+.huemnhomebuttontext2 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  color: #2b8ec9;
+}
+
+.huemntag {
+  font-family: "Inter";
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 16px;
+  color: #7c828d;
+}
+.huemntag2 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0;
+  padding-left: 5px;
+}
+
+.huemntag3 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.huemnheading {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 50px;
+  line-height: 69px;
+  text-align: center;
+  max-width: 940px;
+  color: #2b8ec9;
+  margin: 0px;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+  max-width: 320px;
+  width: 320px;
+  text-align: left;
+}
+
+.huemnheading4 {
+  width: 0px;
+  margin: 0px;
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.huemnheading2 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 51px;
+  text-align: center;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+  max-width: 980px;
+  margin: 0px;
+}
+
+.huemnheading3 {
+  font-size: 50px;
+  margin: 0px;
+  padding: 0px;
+  padding-right: 10px;
+  max-width: 520px;
+  font-weight: 800;
+  line-height: 69px;
+  color: #292d34;
+  font-family: "Inter";
+}
+
+.imgtextbutton {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #7c828d;
+}
+
+.textcontent2 {
+  max-width: 530px;
+  font-family: "Inter";
+
+  font-style: normal;
+  font-weight: 500;
+
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.textcontent4 {
+  max-width: 720px;
+  font-size: 18px;
+  color: #7c828d;
+  font-family: "Inter";
+  line-height: 29px;
+  font-style: normal;
+  font-weight: 500;
+  margin: 0px;
+}
+
+.textcontent5 {
+  max-width: 720px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 31px;
+  text-align: center;
+  color: #7c828d;
+  margin: 0px;
+}
+
+.textcontent6 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 29px;
+  color: #7c828d;
+  max-width: 520px;
+}
+
+.textlist {
+  padding-left: 10px;
+  max-width: 240px;
+  color: white;
+  font-weight: normal;
+  font-family: "Inter";
+  padding-right: 5px;
+
+  font-style: normal;
+
+  font-size: 18px;
+  line-height: 28px;
+  color: #7c828d;
+}
+
+.textlist2 {
+  padding-left: 36px;
+  font-size: 18px;
+  max-width: 220px;
+  color: white;
+  font-weight: normal;
+  font-family: "Inter";
+  padding-right: 5px;
+
+  font-family: Inter;
+  font-style: normal;
+  line-height: 28px;
+  color: #7c828d;
+}
+
+.textnav {
+  padding: 10px 20px;
+  color: #7c828d;
+  margin: 0px 20px 0px 0px;
+  font-size: 14px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  line-height: 20px;
+  color: #fff;
+}
+
+.textnav2 {
+  padding: 10px 20px;
+  color: #fff;
+  margin: 0px 20px 0px 0px;
+  font-size: 14px;
+  font-family: "Inter";
+
+  font-style: normal;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.textlabel {
+  color: #292d34;
+  font-weight: bolder;
+  font-size: 18px;
+  padding: 0px !important;
+  margin-bottom: 4px;
+  font-family: "Inter";
+}
+
+@media screen and (max-width: 700px) {
+  .textcontent4 {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    max-width: 325px;
+  }
+  .textdefault {
+    font-size: 12px;
+  }
+
+  .textcutomize1 {
+    font-size: 16px;
+  }
+  .textlogo {
+    font-size: 28px;
+  }
+
+  .textcontent4 {
+    font-size: 14px;
+    line-height: 22px;
+    color: #7c828d;
+    max-width: 325px;
+  }
+
+  .textcontent2 {
+    font-size: 14px;
+    line-height: 22px;
+    max-width: 325px;
+  }
+
+  .textheading2 {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.2px;
+    color: #292d34;
+    max-width: 325px;
+  }
+
+  .textheading4 {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.2px;
+    max-width: 325px;
+  }
+
+  .textheading {
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.25px;
+    max-width: 255px;
+  }
+
+  .textcontent {
+    max-width: 180px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .textlist {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #7c828d;
+  }
+  .textlist2 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #7c828d;
+  }
+  .textheading4 {
+    font-size: 24px;
+    color: #ff4d15;
+  }
+
+  .textheading3 {
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    max-width: 325px;
+    letter-spacing: -0.2px;
+    margin: 0px;
+  }
+  .textheading1 {
+    font-size: 24px;
+    line-height: 32px;
+    max-width: 325px;
+    letter-spacing: -0.2px;
+  }
+  .textbutton {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .homeheading3 {
+    font-size: 32px;
+    line-height: 44px;
+  }
+  .homeheading {
+    font-size: 32px;
+    line-height: 44px;
+    max-width: 190px;
+  }
+
+  .textcontent5 {
+    font-size: 16px;
+    line-height: 26px;
+    padding-top: 20px;
+    max-width: 285px;
+  }
+  .hometextcontent {
+    font-size: 16px;
+    line-height: 27px;
+  }
+  .hometextsubheading {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .hometextcontent2 {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .homebuttontext {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .hometextcontent3 {
+    font-size: 10px;
+    line-height: 16px;
+  }
+  .homeheading2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .hometag,
+  .hometag2 {
+    font-size: 10px;
+    line-height: 20px;
+  }
+  .textheading5 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .textcontent3 {
+    line-height: 20px;
+  }
+}

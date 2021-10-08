@@ -1,0 +1,28 @@
+.thcsettingscontainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #090a0c;
+  height: 95vh;
+  color: #fff;
+}
+.thcsettingswrapper {
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #000;
+  color: #fff;
+}
+.thcsettingsactivelabel {
+  color: #ff4d15;
+  font-family: "Inter";
+  transition: 0.5s ease;
+}
+.thcsettingspassivelabel {
+  color: #fff;
+  font-family: "Inter";
+  transition: 0.5s ease;
+}

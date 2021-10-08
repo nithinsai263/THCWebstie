@@ -1,0 +1,38 @@
+{
+  "paths": [
+    {
+      "name": "/billgenerator",
+      "lambdaFunction": "billGenerator",
+      "privacy": {
+        "private": true,
+        "auth": [
+          "/GET"
+        ]
+      },
+      "policyResourceName": "/billgenerator"
+    }
+  ],
+  "resourceName": "billgenerator",
+  "apiName": "billgenerator",
+  "functionArns": [
+    {
+      "lambdaFunction": "billGenerator"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 0,
+    "authRoleName": "amplify-thehomiecompany-dev-194204-authRole",
+    "unAuthRoleName": "amplify-thehomiecompany-dev-194204-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "billGenerator",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

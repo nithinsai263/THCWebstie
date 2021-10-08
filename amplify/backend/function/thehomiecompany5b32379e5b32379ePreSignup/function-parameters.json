@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "thehomiecompany5b32379e5b32379e",
+  "functionName": "thehomiecompany5b32379e5b32379ePreSignup",
+  "resourceName": "thehomiecompany5b32379e5b32379ePreSignup",
+  "parentStack": "auth",
+  "triggerEnvs": "[]",
+  "triggerDir": "C:\\Users\\hp\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PreSignup",
+  "triggerTemplate": "PreSignup.json.ejs",
+  "triggerEventPath": "PreSignup.event.json",
+  "roleName": "thehomiecompany5b32379e5b32379ePreSignup",
+  "skipEdit": true,
+  "enableCors": false
+}

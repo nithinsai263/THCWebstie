@@ -1,0 +1,58 @@
+
+.dropdownMenu {
+  background-color:#fff;
+  width: 130px;
+  position: absolute;
+  top: 35px;
+  right: 5px;
+  list-style: none;
+  text-align: start;
+
+}
+.dropdownMenuActive{
+  background: white;
+  width: 130px;
+  position: absolute;
+  top: 35px;
+  right: 5px;
+  list-style: none;
+  text-align: start;
+  z-index:999
+}
+.dropdownMenu li {
+  background: white;
+  cursor: pointer;
+  padding: 10px 2px;
+}
+
+.dropdownMenu li:hover {
+  background: #767676;
+}
+
+.dropdownMenu.clicked {
+  display: none;
+}
+
+.dropdownLink {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: #fff;
+  padding: 16px;
+}
+.dropdownLiItems {
+  border-bottom: 0px;
+  color: black;
+  font-family: 'Inter';
+  font-size: 12px;
+  margin-left: 10px;
+}
+.adminListLiContainer {
+  display: flex;
+}
+@media screen and (max-width: 960px) {
+  .faCaretDown {
+    display: none;
+  }
+}

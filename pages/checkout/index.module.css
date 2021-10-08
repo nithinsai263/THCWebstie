@@ -1,0 +1,31 @@
+.checkoutpaymentcontainer {
+  min-height: 100vh;
+  background-color: #000;
+  display: flex;
+  color: #fff;
+}
+.checkoutpaymentleftcontainer {
+  min-height: 100vh;
+  width: 60vw;
+  padding: 30px 60px;
+  background-color: #000;
+}
+.checkoutpaymentrightcontainer {
+  position: fixed;
+  right: 0;
+  width: 40vw;
+  min-height: 100vh;
+  padding: 30px 35px;
+  background-color: #fff;
+}
+@media screen and (max-width: 900px) {
+  .checkoutpaymentcontainer {
+    flex-wrap: wrap;
+  }
+  .checkoutpaymentleftcontainer,
+  .checkoutpaymentrightcontainer {
+    width: 100%;
+    min-height: 0px;
+    position: static;
+  }
+}

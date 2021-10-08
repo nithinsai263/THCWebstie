@@ -1,0 +1,310 @@
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"] }
+      { allow: owner, ownerField: "id", operations: [create, read, update] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  email: String!
+  bill:Bill @connection
+  shipaddress: Address @connection
+  orders: [Order] @connection(keyName: "byUser", fields: ["id"])
+  orderitems:[OrderItem] @connection(keyName: "byUser", fields: ["id"])
+  cart: [CartItem] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type Bill
+ @model
+ @auth(
+  rules: [
+    { allow: groups, groups: ["admin"] }
+    { allow: groups, groups: ["user"],  operations: [read] }
+  ]
+  ){
+  subTotal:String!
+  codcharges:String!
+  deliverycharge:String!
+  discount:String!
+  coupon:String!
+  total:String!
+}
+
+type CartItem
+  @model
+  @key(name: "byUser", fields: ["userID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"] }
+      { allow: owner, ownerField: "userID" }
+    ]
+  ){
+  id: ID!
+  userID: ID!
+  user: User @connection(fields: ["userID"])
+  quantity: Int!
+  size: String!   
+  product: Product @connection
+}
+ 
+type Order
+  @model
+  @key(name: "byUser", fields: ["userID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"], operations: [create, read, update, delete] }
+      { allow: owner, ownerField: "userID", operations:[read] }
+    ]
+  ){
+  id: ID!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+  list: [OrderItem] @connection(keyName: "forOrder", fields: ["id"])
+  billdata:BillData!
+  paymentmethod:String!
+  orderstatus:OrderStatus
+  shipaddress: AddressData! 
+}
+
+type AddressData{
+  firstname: String
+  lastname: String
+  email:String
+  address: String
+  city: String
+  state: String
+  pincode: String
+  phonenumber: String
+}
+
+type BillData
+{
+  subTotal:String!
+  codcharges:String!
+  deliverycharge:String!
+  discount:String!
+  coupon:String!
+  total:String!
+}
+
+type OrderItem
+  @model
+  @key(name: "forOrder", fields: ["orderID"])
+  @key(name: "byUser", fields: ["userID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"], operations: [create, read, update, delete] }
+      { allow: owner, ownerField: "userID", operations: [read, update] }
+    ] 
+  ){
+  id: ID!
+  userID: ID!
+  user: User! @connection(fields: ["userID"])
+  orderID: ID!
+  order: Order @connection(fields: ["orderID"])
+  quantity: Int!
+  price:Int!
+  size:String!
+  product: Product @connection
+  issue: Issue @connection
+}
+ 
+type OrderStatus{
+  accepted:Boolean
+  dateaccepted:String
+  dispatched:Boolean
+  datedispatched:String
+  delivered:Boolean
+  datedelivered:String
+}
+ 
+type Product
+  @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["user"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  active:Boolean!
+  name: String!
+  description: String!
+  price: Int!
+  falseprice: Int!
+  trueprice: Int!
+  orders: Int!
+  size: Size! 
+  feature: Feature!
+  productcategory:ProductCategory @connection
+  descriptionblock: DescriptionBlock!
+  picture: [Picture] @connection(keyName: "byProduct", fields: ["id"])
+}
+ 
+type Feature {
+  featureone: String!
+  featuretwo: String!
+  featurethree: String!
+  featurefour: String!
+}
+type DescriptionBlock {
+  descriptionblockone: String!
+  descriptionblocktwo: String!
+}
+type Size {
+  topsize: TopSize
+  bottomsize: BottomSize
+  othersize:OtherSize
+}
+type TopSize{
+  xsmall: Boolean
+  xsmallStock:Int
+  xsmallAvailable:Int
+  small: Boolean
+  smallStock:Int
+  smallAvailable:Int
+  medium: Boolean
+  mediumStock:Int
+  mediumAvailable:Int
+  large: Boolean
+  largeStock:Int
+  largeAvailable:Int
+  xlarge: Boolean
+  xlargeStock:Int
+  xlargeAvailable:Int
+  xxlarge: Boolean
+  xxlargeStock:Int
+  xxlargeAvailable:Int
+}
+type BottomSize{
+  twentySix:Boolean
+  twentySixStock:Int
+  twentySixAvailable:Int
+  twentyEight:Boolean
+  twentyEightStock:Int
+  twentyEightAvailable:Int
+  thirty:Boolean
+  thirtyStock:Int
+  thirtyAvailable:Int
+  thirtytwo:Boolean
+  thirtytwoStock:Int
+  thirtytwoAvailable:Int
+  thirtyFour:Boolean
+  thirtyFourStock:Int
+  thirtyFourAvailable:Int
+  thirtySix:Boolean
+  thirtySixStock:Int
+  thirtySixAvailable:Int
+  thirtyEight:Boolean
+  thirtyEightStock:Int
+  thirtyEightAvailable:Int
+  fourty:Boolean
+  fourtyStock:Int
+  fourtyAvailable:Int
+}
+type OtherSize{
+  stock:Int
+  available:Int
+}
+ 
+type ProductCategory @model
+@auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: groups, groups: ["admin"] }
+      { allow: groups, groups: ["user"], operations: [read] }
+    ]
+  ){
+  id :ID!
+  name:String!
+  category: ProductCategorySubCategory
+}
+ 
+type ProductCategorySubCategory {
+  top:Boolean!
+  bottom:Boolean!
+  other:Boolean!
+}
+ 
+type Picture
+  @model
+  @key(name: "byProduct", fields: ["productID"])
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: public, operations: [read], provider: iam }
+      { allow: groups, groups: ["user"], operations: [read] }
+      { allow: groups, groups: ["admin"], operations: [create, read, update, delete]}
+    ]
+  ) {
+  id: ID!
+  productID: ID!
+  product: Product @connection(fields: ["productID"])
+  name: String
+  owner: String
+  file: S3Object
+}
+ 
+type S3Object {
+  bucket: String
+  key: String
+  region: String
+}
+ 
+type Address
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin", "user"], operations: [create, read, update, delete] }
+    ]
+  ){
+  id: ID!
+  firstname: String
+  lastname: String
+  email:String
+  address: String
+  city: String
+  state: String
+  pincode: String
+  phonenumber: String
+}
+ 
+type Issue
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin", "user"], operations: [create, read, update, delete] }
+    ]
+  ) {
+  id:ID!
+  category:String!
+  subcategory:String!
+  status:IssueStatus
+}
+ 
+type IssueStatus{
+  issueraised:Boolean!
+  dateissueraised:String!
+  issueresorted:Boolean
+  dateissueresorted:String
+}
+ 
+type Coupon
+ @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"] }
+    ]
+  ) {
+  id:ID!
+  name:String!
+  discount:Int!
+  numberoforders:Int
+  active:Boolean!
+}

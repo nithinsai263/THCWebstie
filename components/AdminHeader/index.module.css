@@ -1,0 +1,8 @@
+.adminheadercontainer{
+    width:80vw !important;
+    background-color:#fff;
+    height:8vh;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}

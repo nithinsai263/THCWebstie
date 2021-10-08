@@ -1,0 +1,38 @@
+{
+  "paths": [
+    {
+      "name": "/couponvalidator",
+      "lambdaFunction": "couponvalidator",
+      "privacy": {
+        "private": true,
+        "auth": [
+          "/GET"
+        ]
+      },
+      "policyResourceName": "/couponvalidator"
+    }
+  ],
+  "resourceName": "couponvalidator",
+  "apiName": "couponvalidator",
+  "functionArns": [
+    {
+      "lambdaFunction": "couponvalidator"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 0,
+    "authRoleName": "amplify-thehomiecompany-dev-194204-authRole",
+    "unAuthRoleName": "amplify-thehomiecompany-dev-194204-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "couponvalidator",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+@font-face {
+  src: url("../../assets/BebasNeue-Bold.ttf");
+  font-family: bebasneue-bold;
+}
+.thcmobilecartmaincontainer {
+  min-height: 100vh;
+  background-color: #000;
+  padding: 10vh 5vw 3vh 5vw;
+}
+.thcmobilecartheadertext {
+  text-align: center;
+  color: #ff4d15;
+  font-family: bebasneue-bold;
+}
+.thcmobilecartcheckoutcontainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 30;
+  width: 100vw;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.thcmobilecartcheckouttext {
+  color: #000;
+  font-family: bebasneue-bold;
+}

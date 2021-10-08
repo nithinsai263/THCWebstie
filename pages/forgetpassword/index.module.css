@@ -1,0 +1,97 @@
+@font-face {
+  src: url("../../src/assets/Montserrat-Regular.ttf");
+  font-family: montserrat-regular;
+}
+@font-face {
+  src: url("../../src/assets/Poppins-Regular.ttf");
+  font-family: poppins-regular;
+}
+.contact-section {
+  background-color: #000;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  margin-top: 20;
+}
+
+.login-container-1 {
+  color: #555;
+  border: 1px solid #ff4d15;
+  background-color: #000;
+  box-shadow: #ff4d15 0 0 10px;
+  min-height: 400px;
+  min-width: 360px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 990;
+}
+.login-content-wrapper {
+  margin-top: -20px;
+  animation-name: thehomiecompanySigninContainer;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+}
+@keyframes thehomiecompanySigninContainer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.login-email-wrapper {
+  margin-bottom: 20px;
+}
+.login-password-wrapper {
+  margin-bottom: 10px;
+}
+.login-signup-link {
+  font-size: 10px;
+  font-family: poppins-regular;
+  margin-bottom: 45px;
+}
+input#abcdefg {
+  background-color: #999;
+  color: rgba(113, 113, 113, 0.8);
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #e6e7e8;
+  width: 290px;
+  height: 35px;
+  padding-left: 10px;
+  border-radius: 3px;
+}
+input#abcdefg:focus {
+  outline: none !important;
+  border-bottom: 1px solid #ff4d15;
+  transition: 0.3s;
+}
+.login-label-container {
+  font-family: poppins-regular;
+  color: #555;
+  font-size: 15px;
+}
+
+input#loginbutton {
+  margin-top: 30px;
+  color: #fff;
+  background-color: #fff;
+  border: none;
+  height: 35px;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: poppins-regular;
+  background-color: #ff4d15;
+}
+
+input#loginbutton:hover {
+  background-color: #ff4d15;
+  color: #fff;
+  transition: 0.2s;
+}

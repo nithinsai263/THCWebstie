@@ -1,0 +1,125 @@
+.thcordercard {
+  background-color: #000;
+  display: flex;
+  width: 100%;
+  height: 330px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+  color: #fff;
+}
+.thcordercardimagewrapper {
+  height: 200px;
+  width: 200px;
+  transition: opacity 0.5s ease-in-out;
+}
+.ordercardbutton {
+  height: 35px;
+  width: 110px;
+  border-radius: 3px;
+  background-color: #ff4d15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+.orderCardTextWrapper {
+  margin-left: 20px;
+  transition: all 0.5s ease-in-out;
+}
+.orderCardText {
+  font-size: 14px;
+  color: #fff;
+}
+.orderCardHeader {
+  display: flex;
+  justify-content: space-evenly;
+  height: 40px;
+  align-items: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+.orderCardHeaderText {
+  margin: 0;
+  padding: 0;
+}
+.orderNavigatorContainer {
+  background-color: #111;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  animation-name: navigatorContainer;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes navigatorContainer {
+  0% {
+    height: 0px;
+    opacity: 0;
+  }
+  100% {
+    height: 110px;
+    opacity: 1;
+  }
+}
+
+.orderNavigatorContainerHide {
+  background-color: #111;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  animation-name: navigatorContainerHide;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes navigatorContainerHide {
+  0% {
+    height: 110px;
+    opacity: 1;
+  }
+  100% {
+    height: 0px;
+    opacity: 0;
+  }
+}
+@media screen and (max-width: 900px) {
+  .thcordercard {
+    height: 250px;
+    font-size: 12px;
+  }
+  .thcordercardimagewrapper {
+    height: 150px;
+    width: 150px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .thcordercardimagewrapper {
+    height: 80px;
+    width: 80px;
+  }
+  .thcordercard {
+    height: 160px;
+  }
+  .ordercardbutton {
+    height: 25px;
+    width: 70px;
+    font-size: 12px;
+  }
+  .orderCardText {
+    font-size: 10px;
+    padding: 3px;
+    margin: 0;
+  }
+  .orderCardHeader {
+    font-size: 10px;
+  }
+  .orderCardTextWrapper {
+    margin-left: 5px;
+  }
+}

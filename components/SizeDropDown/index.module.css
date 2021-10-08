@@ -1,0 +1,51 @@
+.thcsizecontainer {
+  border: 1px solid white;
+  position: absolute;
+  transition: 0.5s ease;
+}
+.thcsizeitem {
+  margin: 0px;
+  height: 40px;
+  width: 540px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  color: #555;
+  cursor: pointer;
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 14px;
+}
+.thcsizeitem:hover {
+  background-color: #aaa;
+  transition: 0.5s ease;
+}
+.thcsizebutton {
+  margin-bottom: 15px;
+  width: 540px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff4d15;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight:500
+}
+@media screen and (max-width: 750px) {
+  .thcsizebutton {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+@media screen and (max-width: 750px) {
+  .thcsizebutton {
+    width: 100%;
+  }
+  .thcsizeitem {
+    width: 48vw;
+  }
+}

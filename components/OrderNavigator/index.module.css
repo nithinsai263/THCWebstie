@@ -1,0 +1,26 @@
+.orderProgressParentContainer {
+  background-color: #000;
+  padding-bottom: 20px;
+  padding-top: 30px;
+}
+.progressBarMainContainer {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.progressBarwrapper {
+  width: 90vw;
+}
+.progressBar {
+  display: flex;
+  height: 5px;
+  width: 90vw;
+  background-color: gray;
+  border-radius: 10px;
+}
+.iconcontainer {
+  display: flex;
+  width: 90vw;
+  justify-content: space-between;
+  margin-top: -20px;
+}

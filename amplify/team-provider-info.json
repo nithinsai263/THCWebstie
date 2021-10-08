@@ -1,0 +1,52 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-thehomiecompany-dev-194204-authRole",
+      "UnauthRoleArn": "arn:aws:iam::070694908701:role/amplify-thehomiecompany-dev-194204-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::070694908701:role/amplify-thehomiecompany-dev-194204-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+      "UnauthRoleName": "amplify-thehomiecompany-dev-194204-unauthRole",
+      "StackName": "amplify-thehomiecompany-dev-194204",
+      "StackId": "arn:aws:cloudformation:ap-south-1:070694908701:stack/amplify-thehomiecompany-dev-194204/3fadfad0-130a-11ec-bb6a-02fe6675488a",
+      "AmplifyAppId": "dr6h7srtq0uam"
+    },
+    "categories": {
+      "function": {
+        "thehomiecompany5b32379e5b32379ePostConfirmation": {
+          "deploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+          "s3Key": "amplify-builds/thehomiecompany5b32379e5b32379ePostConfirmation-59526d48566555592b47-build.zip"
+        },
+        "thehomiecompany5b32379e5b32379ePreSignup": {
+          "deploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+          "s3Key": "amplify-builds/thehomiecompany5b32379e5b32379ePreSignup-6876526d4c2b4147576d-build.zip"
+        },
+        "billGenerator": {
+          "deploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+          "s3Key": "amplify-builds/billGenerator-54507063684b51335774-build.zip"
+        },
+        "AddBill": {
+          "deploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+          "s3Key": "amplify-builds/AddBill-53314e633544614a3952-build.zip"
+        },
+        "razorpayGenerator": {
+          "deploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+          "s3Key": "amplify-builds/razorpayGenerator-34714650625270613364-build.zip"
+        },
+        "couponvalidator": {
+          "deploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+          "s3Key": "amplify-builds/couponvalidator-31484674414371543549-build.zip"
+        },
+        "codorder": {
+          "deploymentBucketName": "amplify-thehomiecompany-dev-194204-deployment",
+          "s3Key": "amplify-builds/codorder-7a73366b4b50686a394c-build.zip"
+        }
+      },
+      "auth": {
+        "thehomiecompany5b32379e5b32379e": {
+          "googleClientId": "772578196503-4b6fj0puunp79stfjta27pa0fd070puk.apps.googleusercontent.com"
+        }
+      }
+    }
+  }
+}

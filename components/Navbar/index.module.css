@@ -1,0 +1,148 @@
+.navMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  text-align: center;
+  justify-content: end;
+}
+.navItems > .active {
+  color: #2b8ec9;
+  border-bottom: 1px solid #2b8ec9;
+}
+.decorationNone {
+  text-decoration: none;
+}
+input#chaoticSearch {
+  height: 30px;
+  width: 30vw;
+  background-color: #000;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  font-family: "Inter";
+  box-shadow: #fff 0 0 5px;
+  margin-left: 10vw;
+}
+input#chaoticSearch::placeholder {
+  color: #aaa;
+}
+input#chaoticSearch2 {
+  height: 30px;
+  width: 80vw;
+  background-color: #000;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  font-family: "Inter";
+  box-shadow: #fff 0 0 5px;
+}
+input#chaoticSearch2::placeholder {
+  color: #aaa;
+}
+.huemnNavContainer {
+  height: 10vh;
+  width: 100vw;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+  position: fixed;
+  z-index: 999;
+}
+.huemnContainer2 {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 20px;
+  cursor: pointer;
+  height: 100%;
+}
+.huemnContainer3 {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  right: 20px;
+  cursor: pointer;
+  z-index: 999;
+}
+.huemnContainer4 {
+  position: absolute;
+  bottom: 70px;
+  left: 60px;
+  right: 60px;
+}
+.huemnContainer5 {
+  flex-direction: column;
+  background-color: #2b8ec9;
+  height: 5vh;
+  color: #ffffff;
+  border-radius: 4px;
+}
+.huemnContainer6 {
+  height: 5vh;
+  flex-direction: column;
+}
+.containerAlign {
+  display: flex;
+  align-items: center;
+}
+.containerCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex {
+  display: flex;
+}
+.mobilenavbarcontainer {
+  z-index: 999;
+}
+@media screen and (max-width: 750px) {
+  .navMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0px !important;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+  .navMenuActive {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+    opacity: 1;
+    left: 0;
+    top: 0vh;
+    height: 100vh;
+    background: #000;
+    backdrop-filter: blur(5px);
+    transition: all 0.5s ease;
+    z-index: 998;
+    list-style-type: none;
+  }
+  .navLinks {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .navLinks:hover {
+    color: #ff4d15;
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+}

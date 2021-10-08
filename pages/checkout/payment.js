@@ -15,8 +15,10 @@ export default function Payment({ setPageState, currbill, setPaymentMethod, coup
   const [name, setName] = useState("Mehul");
   const [codpayment, setCodPayment]= useState(false);
   const [onlinepayment, setOnlinePayment]=useState(true);
+  const [loading, setLoading]=useState(false);
 
   async function callcodapi(){
+    setLoading(true);
     const user=await Auth.currentAuthenticatedUser();
     const token= user.signInUserSession.idToken.jwtToken;
     const requestData = {
@@ -27,10 +29,12 @@ export default function Payment({ setPageState, currbill, setPaymentMethod, coup
     const data = await API.get("codorder", "/codorder", requestData);
     if(data){
        Router.push("/");
+       setLoading(false);
     }
   }
 
   async function displayrazorpay() {
+    setLoading(true);
     const user = await Auth.currentAuthenticatedUser();
     const token = user.signInUserSession.idToken.jwtToken;
     const requestData = {
@@ -48,6 +52,7 @@ export default function Payment({ setPageState, currbill, setPaymentMethod, coup
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
+    setLoading(false);
 
     const options = {
       key: "rzp_test_tASNygvKTZLHX7",
@@ -136,7 +141,8 @@ export default function Payment({ setPageState, currbill, setPaymentMethod, coup
           </div>
         </div>
         <div
-          style={{ marginRight: "-20px" }}
+          disabled={loading}
+          style={{ marginRight: "-20px", opacity:loading?0.5:1 }}
           onClick={() => {
            if(onlinepayment){
               displayrazorpay();

@@ -3,7 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 
 import Footer from "../../../components/AdminFooter";
 import Header from "../../../components/AdminHeader";
-// import Sidebar from "../../../components/AdminSidebar";
+import Sidebar from "../../../components/AdminSideBar";
 import AdminTable from "../../../components/AdminTable/ProductTable";
 import { listProducts } from "../../../src/graphql/queries";
 

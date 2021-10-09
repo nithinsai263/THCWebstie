@@ -3,7 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 
 import Footer from "../../../components/AdminFooter";
 import Header from "../../../components/AdminHeader";
-// import Sidebar from "../../../components/AdminSidebar";
+import Sidebar from "../../../components/AdminSideBar";
 import AdminTable from "../../../components/AdminTable/CouponTable";
 import { listOrders } from "../../../src/graphql/queries";
 
@@ -39,7 +39,7 @@ import { listOrders } from "../../../src/graphql/queries";
 
   return (
     <div style={{ display: "flex" }}>
-
+      <Sidebar/>
       <div style={{ width: "100%" }}>
         <Header />
         <div style={{ minHeight: "100vh", backgroundColor: "#ebedef" }}>

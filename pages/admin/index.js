@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Auth from "@aws-amplify/auth";
 import Router from "next/router";
-import { Line } from "react-chartjs-2";
 
 import Footer from "../../components/AdminFooter";
 import Header from "../../components/AdminHeader";
-// import Sidebar from "../../components/AdminSidebar/index.js";
+import Sidebar from "../../components/AdminSideBar";
 import styles from "./index.module.css";
 import AdminCard from "../../components/AdminCard";
 
@@ -57,7 +56,7 @@ function AdminLanding() {
   return (
     <>
       <div style={{ display: "flex" }}>
-
+      <Sidebar/>
         <div style={{ width: "80vw" }}>
           <Header />
           <div style={{ minHeight: "100vh", backgroundColor: "#ebedef" }}>
@@ -104,7 +103,7 @@ function AdminLanding() {
                   Order Traffic
                 </h3>
                 <div style={{ position: "relative" }}>
-                  <Line data={data} />
+                  
                 </div>
               </div>
               <div className={styles.dashboardCard2Container}>

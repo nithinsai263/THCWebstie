@@ -1,5 +1,5 @@
 import React from "react";
-import Text from "../text";
+import Text from "../Text";
 import Image from "next/image";
 
 export default function Button(props) {

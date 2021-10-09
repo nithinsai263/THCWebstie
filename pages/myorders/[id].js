@@ -1,5 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Radio } from "@material-ui/core";
+import { useRouter } from "next/router";
+import { API, Auth, graphqlOperation, Storage, Hub } from "aws-amplify";
+import Router from "next/router";
 
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -9,6 +12,8 @@ import AdminPopup from "../../components/Popup";
 import PopupOrder from "../../components/PopupOrder";
 import Invoice from "../../components/Invoice";
 import styles from "./index.module.css";
+import {getUser} from "../../src/graphql/queries";
+
 const data = [
   {
     status: true,
@@ -27,10 +32,42 @@ const data = [
   },
 ];
 function MyOrdersId() {
+  const router = useRouter();
   const [trigger, settrigger] = useState(-1);
   const [sizeissue, setSizeIssue]=useState(false);
   const [productquality, setProductQuality]=useState(false);  
   const [anotherproduct,setAnotherProduct]=useState(false);
+  const [userData, setUserData] = useState(null);
+  const [index, setIndex]=useState(-1);
+
+  useEffect(() => {
+    if (router.asPath !== router.route) {
+      async function fetchingOrderDetails(){
+        const orderid=router.query.id;
+        try{
+          let user = await Auth.currentAuthenticatedUser();
+          const userid = user.attributes.sub;
+          console.log(user);
+          const userdata = await API.graphql(
+            graphqlOperation(getUser, { id: userid })
+          );
+          setUserData(userdata.data.getUser);
+          console.log(userdata.data.getUser);
+          const currorderindex=userdata.data.getUser.orders.items.findIndex((item) => item.id === router.query.id)
+          setIndex(currorderindex);
+          console.log(currorderindex);
+
+          if(currorderindex===-1){
+            throw new Error('No Order Found with this id')
+          }
+        }catch(e){
+          Router.push("/")
+        }
+      }
+      fetchingOrderDetails();
+    }
+  }, [router]);
+
   return (
     <>
       <Navbar />
@@ -79,16 +116,15 @@ function MyOrdersId() {
               alignItems: "center",
             }}
           >
+          {userData && index!==-1 &&
             <div>
-              <p className={styles.thcmyorderdetailtext}>Order ID: 1234567</p>
-              <p className={styles.thcmyorderdetailtext}>Order Contact: +91 8686959744</p>
-              <p className={styles.thcmyorderdetailtext}>Order Email: ankitkumarak901@gmail.com</p>
-              <p className={styles.thcmyorderdetailtext}>
-                Shipped to: Flat: 102, Plot: 53, Rishabh Residency, Kalyan Nagar
-                Phase 3, Hyderabad
-              </p>
-              <p className={styles.thcmyorderdetailtext}>Pin : 500018</p>
+              <p className={styles.thcmyorderdetailtext}>Order ID: {userData.orders.items[index].id}</p>
+              <p className={styles.thcmyorderdetailtext}>Order Contact: {userData.orders.items[index].shipaddress.phonenumber}</p>
+              <p className={styles.thcmyorderdetailtext}>Order Email: {userData.orders.items[index].shipaddress.email}</p>
+              <p className={styles.thcmyorderdetailtext}>Shipped to: {userData.orders.items[index].shipaddress.address}</p>
+              <p className={styles.thcmyorderdetailtext}>Pin : {userData.orders.items[index].shipaddress.pincode}</p>
             </div>
+            }
             <div>  
             <Invoice>   
               <div className={styles.myorderdetailcardbutton}>
@@ -116,15 +152,11 @@ function MyOrdersId() {
             <h4 style={{ margin: 6 }}> Ordered Items</h4>
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        { userData && index!==-1 && userData.orders.items[0].list.items.map((oi, index)=>(
+        <div key={index} style={{ display: "flex", justifyContent: "center" }}>
           <InnerOrderCard />
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <InnerOrderCard />
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <InnerOrderCard />
-        </div>
+        ))}
         <div
           style={{
             backgroundColor: "#111",
@@ -136,6 +168,7 @@ function MyOrdersId() {
         >
           <h4 style={{ margin: 6 }}> Price Breakdown</h4>
         </div>
+        {userData && index!==-1 &&
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div style={{ width: "90vw" }}>
             <div className={styles.myorderdetailbillrow}>
@@ -154,7 +187,7 @@ function MyOrdersId() {
                   padding: 0,
                 }}
               >
-                Rs 290
+                Rs {userData.orders.items[index].billdata.subTotal}
               </p>
             </div>
             <div className={styles.myorderdetailbillrow}>
@@ -173,7 +206,26 @@ function MyOrdersId() {
                   padding: 0,
                 }}
               >
-                Rs 125
+                Rs {userData.orders.items[index].billdata.deliverycharge}
+              </p>
+            </div>
+            <div className={styles.myorderdetailbillrow}>
+              <h4
+                style={{
+                  margin: 0,
+                  padding: 0,
+                  width: 125,
+                }}
+              >
+                COD Charges
+              </h4>
+              <p
+                style={{
+                  margin: 0,
+                  padding: 0,
+                }}
+              >
+                Rs {userData.orders.items[index].billdata.codcharges}
               </p>
             </div>
             <div className={styles.myorderdetailbillrow}>
@@ -192,9 +244,10 @@ function MyOrdersId() {
                   padding: 0,
                 }}
               >
-                - Rs 0
+                - Rs {userData.orders.items[index].billdata.discount}
               </p>
             </div>
+            
             <div className={styles.myorderdetailbillrow}>
               <h4
                 style={{
@@ -211,11 +264,12 @@ function MyOrdersId() {
                   padding: 0,
                 }}
               >
-                Rs 390
+                Rs {userData.orders.items[index].billdata.total}
               </p>
             </div>
           </div>
         </div>
+        }
       </div>
       <Footer />
        {trigger === 2 && (

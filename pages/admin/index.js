@@ -5,7 +5,7 @@ import { Line } from "react-chartjs-2";
 
 import Footer from "../../components/AdminFooter";
 import Header from "../../components/AdminHeader";
-import Sidebar from "../../components/AdminSidebar/index.js";
+// import Sidebar from "../../components/AdminSidebar/index.js";
 import styles from "./index.module.css";
 import AdminCard from "../../components/AdminCard";
 
@@ -57,7 +57,7 @@ function AdminLanding() {
   return (
     <>
       <div style={{ display: "flex" }}>
-        <Sidebar />
+
         <div style={{ width: "80vw" }}>
           <Header />
           <div style={{ minHeight: "100vh", backgroundColor: "#ebedef" }}>

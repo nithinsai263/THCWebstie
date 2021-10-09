@@ -93,7 +93,7 @@ export default function Navbar(props) {
 
   return (
     <div className={styles.huemnNavContainer}>
-      <MediaQuery minWidth={750}>
+      <MediaQuery minWidth={850}>
         <a href={"/"} className={styles.decorationNone}>
           <img src={"/logo.png"} style={{height:'50px', width:'60px'}}  alt="image" />
         </a>
@@ -198,7 +198,7 @@ export default function Navbar(props) {
           )}
         </div>
       </MediaQuery>
-      <MediaQuery maxWidth={750}>
+      <MediaQuery maxWidth={850}>
         {!search && (
           <div className={styles.mobilenavbarcontainer}>
             <a className={styles.decorationNone} href={"/"}>

@@ -11,7 +11,7 @@ import {
 
 import Footer from "../../../components/AdminFooter";
 import Header from "../../../components/AdminHeader";
-import Sidebar from "../../../components/AdminSidebar";
+// import Sidebar from "../../../components/AdminSidebar";
 import awsExports from "../../../src/aws-exports";
 import {
   createPicture,
@@ -232,7 +232,7 @@ function UploadItem() {
   return (
     <>
       <div style={{ display: "flex" }}>
-        <Sidebar />
+
         <div style={{ width: "80vw" }}>
           <Header />
           <div style={{ minHeight: "100vh", backgroundColor: "#ebedef" }}>

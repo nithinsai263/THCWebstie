@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
+import Link from "next/link";  
+
 import styles from "./index.module.css";
 import Button from "../Button";
 import OrderNavigator from "../OrderNavigator";
-import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
 const data = [
   {
     status: true,
@@ -71,17 +73,17 @@ export default function OrderCard({date, total, address, orderid, quantity, subt
           <div className={styles.orderCardTextWrapper}>
             {" "}
             <p className={styles.orderCardText}>
-              Order ID: ${orderditems[currentIndex].orderid}
+              Order ID: {orderid}
             </p>
             <p className={styles.orderCardText}>
               {" "}
               ${orderditems[currentIndex].prodname}
             </p>
             <p className={styles.orderCardText}>
-              Quantity: ${orderditems[currentIndex].quantity}
+              Quantity: {quantity}
             </p>
             <p className={styles.orderCardText}>
-              ₹ ${orderditems[currentIndex].price}
+              ₹ {total}
             </p>
           </div>
         </div>
@@ -97,11 +99,11 @@ export default function OrderCard({date, total, address, orderid, quantity, subt
           />
         </div>
         <div>
-          <a href={"/myorders/1"}>
+          <Link href={`/myorders/${orderid}`}>
             <div className={styles.ordercardbutton}>
               <p>Details</p>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { TextField, Button, TextareaAutosize, Radio } from "@material-ui/core";
 
 import Footer from "../../../components/AdminFooter";
 import Header from "../../../components/AdminHeader";
-import Sidebar from "../../../components/AdminSidebar";
+// import Sidebar from "../../../components/AdminSidebar";
 
 export default function AddCoupon() {
     const [name, setName] = useState();
@@ -15,7 +15,7 @@ export default function AddCoupon() {
     }
     return (
       <div style={{ display: "flex" }}>
-      <Sidebar />
+ 
       <div style={{ width: "100%" }}>
         <Header />
         <div style={{ minHeight: "100vh", backgroundColor: "#ebedef",display:'flex', justifyContent:'center' }}>

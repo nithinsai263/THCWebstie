@@ -12,6 +12,7 @@ export default function MyOrders({ history }) {
   const [allorders, setAllorders] = useState(true);
   const [returnedorders, setReturnedorders] = useState(false);
   const [userData, setUserData] = useState("");
+  const [issueorders, setIssueOrders]=useState();
 
   useEffect(() => {
     async function  fetchingOrders() { 
@@ -22,13 +23,16 @@ export default function MyOrders({ history }) {
         graphqlOperation(getUser, { id: userid })
       );
       setUserData(userdata.data.getUser);
-      if(userData){
-      console.log("wassap:", userData.orders.items.filter(or=>or.list.items.filter(orr=>orr.issue!==null)));
-    }
       console.log(userdata.data.getUser.orders);
+      //need to fix issue order
+      setIssueOrders(userdata.data.getUser.orders.items.map(or=>or.list.items.filter(orr=>orr.issue!==null)))
+      console.log("wassap:", userdata.data.getUser.orders.items.map(or=>or.list.items.filter(orr=>orr.issue===null)));
     }
     fetchingOrders();
   }, [])
+if(issueorders){
+  console.log(issueorders[0])
+}
 
   return (
     <>
@@ -77,7 +81,7 @@ export default function MyOrders({ history }) {
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
                 {userData && userData.orders.items.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.length} subtotal={o.billdata.subTotal}/>
+                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
                 ))}
                 </div>
               </div>
@@ -85,8 +89,8 @@ export default function MyOrders({ history }) {
             {returnedorders && (
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
-                {userData && userData.orders.items.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.length} subtotal={o.billdata.subTotal}/>
+                {issueorders  && issueorders[0]!==[]&& issueorders.map((o, index)=>(
+                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
                 ))}
                 </div>
               </div>
@@ -114,7 +118,15 @@ export default function MyOrders({ history }) {
                 borderBottom: "1px solid #eee",
               }}
             >
-              All Orders
+               <p
+                  className={
+                    allorders
+                      ? styles.thcmyordersactivelabel
+                      : styles.thcmyorderspassivelabel
+                  }
+                >
+                  All Orders
+                </p>
             </div>
             <div
               onClick={() => {
@@ -128,7 +140,15 @@ export default function MyOrders({ history }) {
                 borderBottom: "1px solid #eee",
               }}
             >
-              Returned Orders
+                <p
+                  className={
+                    returnedorders
+                      ? styles.thcmyordersactivelabel
+                      : styles.thcmyorderspassivelabel
+                  }
+                >
+                  Returned Orders
+                </p>
             </div>
           </div>
           <div>
@@ -136,7 +156,7 @@ export default function MyOrders({ history }) {
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
                 {userData && userData.orders.items.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.length} subtotal={o.billdata.subTotal}/>
+                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
                 ))}
                 </div>
               </div>
@@ -144,8 +164,8 @@ export default function MyOrders({ history }) {
             {returnedorders && (
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
-                {userData && userData.orders.items.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.length} subtotal={o.billdata.subTotal}/>
+                {userData && (userData.orders.items.map(or=>or.list.items.filter(orr=>orr.issue!==null))).orders.items.map((o, index)=>(
+                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
                 ))}
                 </div>
               </div>

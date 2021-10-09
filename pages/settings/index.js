@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/footer";
+import Footer from "../../components/Footer";
 import MediaQuery from "react-responsive";
 import styles from "./index.module.css";
 import Input from "../../components/Input";

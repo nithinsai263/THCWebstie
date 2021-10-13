@@ -183,8 +183,8 @@ export default function Navbar(props) {
 
               <Button
                 onClick={() => {
-                  Auth.signOut();
-                  setAuthenticated(false);
+                  await Auth.signOut();
+                  await setAuthenticated(false);
                   window.location.reload(true);
                 }}
                 name={"Logout"}

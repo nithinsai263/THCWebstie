@@ -94,11 +94,11 @@ function ItemPage() {
             </div>
           </div>
           <div className={styles.thehomiecompanyitempagetextcontainer}>
-            <div style={{height:'30px', width:'100px', backgroundColor:'gray', marginTop:'40px'}}/>
-            <div style={{height:'30px', width:'150px', backgroundColor:'gray', marginTop:'40px'}}/>
-            <div style={{height:'30px', width:'150px', backgroundColor:'gray', marginTop:'40px'}}/>
-            <div style={{height:'110px', width:'600px', backgroundColor:'gray', marginTop:'40px'}}/>
-            <div style={{height:'170px', width:'600px', backgroundColor:'gray', marginTop:'40px'}}/>
+            <div style={{height:'30px', width:'20%', backgroundColor:'gray', marginTop:'40px', marginLeft:10, textAlign:'center', alignSelf:'center'}}/>
+            <div style={{height:'30px', width:'30%', backgroundColor:'gray', marginTop:'40px', marginLeft:10}}/>
+            <div style={{height:'30px', width:'30%', backgroundColor:'gray', marginTop:'40px', marginLeft:10}}/>
+            <div style={{height:'110px', width:'90%', backgroundColor:'gray', marginTop:'40px', marginLeft:10}}/>
+            <div style={{height:'170px', width:'95%', backgroundColor:'gray', marginTop:'40px', marginLeft:10}}/>
           </div>
         </div>
       </>
@@ -169,11 +169,13 @@ function ItemPage() {
                   </div>
                 </div>
               }
-              {!userData && <Link href={"/signin"}><a> <div style={{height:40, width:"100%", borderRadius:4, backgroundColor:"#ff4d14", color:"#fff", display:'flex', justifyContent:'center', alignItems:'center', fontFamily:'Inter', fontWeight:'500', cursor:'pointer', fontSize:16, marginTop:10}}>Sign in to add to cart</div></a></Link>}
+              {!userData && <Link href={"/signin"}><a> <div style={{height:40, width:"100%", borderRadius:4, backgroundColor:"#000", border:"1px solid #ff4d15", color:"#ff4d15", display:'flex', justifyContent:'center', alignItems:'center', fontFamily:'Inter', fontWeight:'500', cursor:'pointer', fontSize:16, marginTop:10}}>Sign in to add to cart</div></a></Link>}
               </MediaQuery>
             </div>
           </div>
           <div className={styles.thcitemsbottombuttoncontainer}>
+          {userData &&
+            <>
             <div style={{ width: "50%" }}>
               <SizeDropDown productid={router.query.id} category={productData.productcategory.category} prodsize={productData.size} productsize={productsize} setProductSize={setProductSize}/>
             </div>
@@ -185,6 +187,13 @@ function ItemPage() {
             >
               <AddToCart productid={router.query.id} productsize={productsize}/>
             </div>
+            </>
+            }
+            {!userData &&
+            <div style={{width:'100%', height:'100%', backgroundColor:"#ff4d15", color:"#fff", display:'flex', justifyContent:'center', alignItems:'center'}}>
+                <h4>Sign in to add to cart</h4>
+            </div>
+            }
           </div>
           {!productData.active && 
             <div className={styles.soldoutImageContainer}>
@@ -195,7 +204,9 @@ function ItemPage() {
           }
         </>
       )}
+      {userData &&
       <Cart />
+      }
       <Footer />
     </>
   );

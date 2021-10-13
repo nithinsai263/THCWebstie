@@ -185,6 +185,7 @@ export default function Navbar(props) {
                 onClick={() => {
                   Auth.signOut();
                   setAuthenticated(false);
+                  window.location.reload(true);
                 }}
                 name={"Logout"}
                 color={"#fff"}

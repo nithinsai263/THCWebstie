@@ -166,7 +166,9 @@ export default function Home() {
             })}
         </MediaQuery>
       </div>
-      <Cart />
+      {curruser&&
+        <Cart />
+      }
       <Footer />
     </div>
   );

@@ -182,7 +182,7 @@ export default function Navbar(props) {
               </Link>
 
               <Button
-                onClick={() => {
+                onClick={async() => {
                   await Auth.signOut();
                   await setAuthenticated(false);
                   window.location.reload(true);

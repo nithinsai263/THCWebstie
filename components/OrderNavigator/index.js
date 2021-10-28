@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import styles from "./index.module.css";
+
 const OrderNavigator = ({ data, width }) => {
   return (
     <div className={styles.orderProgressParentContainer}>

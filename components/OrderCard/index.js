@@ -80,7 +80,7 @@ export default function OrderCard({date, total, address, orderid, quantity, subt
               ${orderditems[currentIndex].prodname}
             </p>
             <p className={styles.orderCardText}>
-              Quantity: {quantity}
+              Items: {quantity}
             </p>
             <p className={styles.orderCardText}>
               ₹ {total}

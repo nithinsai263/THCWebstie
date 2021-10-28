@@ -160,7 +160,7 @@ function ItemPage() {
               { userData &&
                 <div className={styles.thehomiecompanymedia}>
                   <div>
-                  <div>
+                  <div >
                     <SizeDropDown productid={router.query.id} category={productData.productcategory.category} prodsize={productData.size} productsize={productsize} setProductSize={setProductSize}/>
                   </div>
                   <div style={{height:40}}>
@@ -169,12 +169,13 @@ function ItemPage() {
                   </div>
                 </div>
               }
-              {!userData && <Link href={"/signin"}><a> <div style={{height:40, width:"100%", borderRadius:4, backgroundColor:"#000", border:"1px solid #ff4d15", color:"#ff4d15", display:'flex', justifyContent:'center', alignItems:'center', fontFamily:'Inter', fontWeight:'500', cursor:'pointer', fontSize:16, marginTop:10}}>Sign in to add to cart</div></a></Link>}
+              {!userData && <Link href={"/signin"}><a> <div style={{height:40, width:"100%", borderRadius:4, backgroundColor:"#000", border:"1px solid #ff4d15", color:"#ff4d15", display:'flex', justifyContent:'center', alignItems:'center', fontFamily:'Inter', fontWeight:'500', cursor:'pointer', fontSize:16, marginTop:30}}>Sign in to add to cart</div></a></Link>}
               </MediaQuery>
             </div>
           </div>
           <div className={styles.thcitemsbottombuttoncontainer}>
           {userData &&
+          <MediaQuery maxWidth={750}>
             <>
             <div style={{ width: "50%" }}>
               <SizeDropDown productid={router.query.id} category={productData.productcategory.category} prodsize={productData.size} productsize={productsize} setProductSize={setProductSize}/>
@@ -188,6 +189,7 @@ function ItemPage() {
               <AddToCart productid={router.query.id} productsize={productsize}/>
             </div>
             </>
+            </MediaQuery>
             }
             {!userData &&
             <div style={{width:'100%', height:'100%', backgroundColor:"#ff4d15", color:"#fff", display:'flex', justifyContent:'center', alignItems:'center'}}>

@@ -64,7 +64,7 @@ export default function CartCard({prodid, picture, title, subtitle, price, false
               }
             >
               <div style={{ paddingBottom: "20px" }}>
-                <a className={styles.decorationNone} href={`/items/1`}>
+                <a className={styles.decorationNone} href={`/items/${prodid}`}>
                   <FaEye size={40} color={"#fff"} />
                 </a>
               </div>

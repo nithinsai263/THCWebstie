@@ -6,16 +6,16 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import OrderCard from "../../components/OrderCard";
 import styles from "./index.module.css";
-import {getUser} from "../../src/graphql/queries";
+import { getUser } from "../../src/graphql/queries";
 
 export default function MyOrders({ history }) {
   const [allorders, setAllorders] = useState(true);
   const [returnedorders, setReturnedorders] = useState(false);
   const [userData, setUserData] = useState("");
-  const [issueorders, setIssueOrders]=useState();
+  const [issueorders, setIssueOrders] = useState();
 
   useEffect(() => {
-    async function  fetchingOrders() { 
+    async function fetchingOrders() {
       let user = await Auth.currentAuthenticatedUser();
       const userid = user.attributes.sub;
 
@@ -25,14 +25,20 @@ export default function MyOrders({ history }) {
       setUserData(userdata.data.getUser);
       console.log(userdata.data.getUser.orders);
       //need to fix issue order
-      setIssueOrders(userdata.data.getUser.orders.items.map(or=>or.list.items.filter(orr=>orr.issue!==null)))
-      console.log("wassap:", userdata.data.getUser.orders.items.map(or=>or.list.items.filter(orr=>orr.issue===null)));
+      setIssueOrders(
+        userdata.data.getUser.orders.items
+          .map((or) => or.list.items.filter((orr) => orr.issue !== null))
+          .filter((val) => val.some((v) => true))
+      );
+      console.log(
+        "wassap:",
+        userdata.data.getUser.orders.items
+          .map((or) => or.list.items.filter((orr) => orr.issue !== null))
+          .filter((val) => val.some((v) => true))
+      );
     }
     fetchingOrders();
-  }, [])
-if(issueorders){
-  console.log(issueorders[0])
-}
+  }, []);
 
   return (
     <>
@@ -80,18 +86,37 @@ if(issueorders){
             {allorders && (
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
-                {userData && userData.orders.items.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
-                ))}
+                  {userData &&
+                    userData.orders.items.map((o, index) => (
+                      <OrderCard
+                        key={index}
+                        date={o.createdAt}
+                        total={o.billdata.total}
+                        address={o.shipaddress.address}
+                        orderid={o.id}
+                        quantity={o.list.items.length}
+                        subtotal={o.billdata.subTotal}
+                      />
+                    ))}
                 </div>
               </div>
             )}
             {returnedorders && (
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
-                {issueorders  && issueorders[0]!==[]&& issueorders.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
-                ))}
+                  {issueorders &&
+                    issueorders[0] !== [] &&
+                    issueorders.map((o, index) => (
+                      <OrderCard
+                        key={index}
+                        date={o.createdAt}
+                        total={o.billdata.total}
+                        address={o.shipaddress.address}
+                        orderid={o.id}
+                        quantity={o.list.items.length}
+                        subtotal={o.billdata.subTotal}
+                      />
+                    ))}
                 </div>
               </div>
             )}
@@ -108,8 +133,8 @@ if(issueorders){
           >
             <div
               onClick={() => {
-                  setAllorders(true);
-                  setReturnedorders(false);
+                setAllorders(true);
+                setReturnedorders(false);
               }}
               style={{
                 marginRight: "20px",
@@ -118,15 +143,15 @@ if(issueorders){
                 borderBottom: "1px solid #eee",
               }}
             >
-               <p
-                  className={
-                    allorders
-                      ? styles.thcmyordersactivelabel
-                      : styles.thcmyorderspassivelabel
-                  }
-                >
-                  All Orders
-                </p>
+              <p
+                className={
+                  allorders
+                    ? styles.thcmyordersactivelabel
+                    : styles.thcmyorderspassivelabel
+                }
+              >
+                All Orders
+              </p>
             </div>
             <div
               onClick={() => {
@@ -140,34 +165,59 @@ if(issueorders){
                 borderBottom: "1px solid #eee",
               }}
             >
-                <p
-                  className={
-                    returnedorders
-                      ? styles.thcmyordersactivelabel
-                      : styles.thcmyorderspassivelabel
-                  }
-                >
-                  Returned Orders
-                </p>
+              <p
+                className={
+                  returnedorders
+                    ? styles.thcmyordersactivelabel
+                    : styles.thcmyorderspassivelabel
+                }
+              >
+                Returned Orders
+              </p>
             </div>
           </div>
           <div>
-              {allorders && (
+            {allorders && (
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
-                {userData && userData.orders.items.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
-                ))}
+                  {userData &&
+                    userData.orders.items.map((o, index) => (
+                      <OrderCard
+                        key={index}
+                        date={o.createdAt}
+                        total={o.billdata.total}
+                        address={o.shipaddress.address}
+                        orderid={o.id}
+                        quantity={o.list.items.length}
+                        subtotal={o.billdata.subTotal}
+                      />
+                    ))}
                 </div>
               </div>
             )}
             {returnedorders && (
               <div className={styles.thcordercardcontainer}>
                 <div className={styles.thcordercardwrapper}>
-                {userData && (userData.orders.items.map(or=>or.list.items.filter(orr=>orr.issue!==null))).orders.items.map((o, index)=>(
-                  <OrderCard key={index} date={o.createdAt} total={o.billdata.total} address={o.shipaddress.address} orderid={o.id} quantity={o.list.items.length} subtotal={o.billdata.subTotal}/>
-                ))}
+                  {userData &&
+                    issueorders.length > 0 &&
+                    issueorders.map((o, index) => (
+                      <OrderCard
+                        key={index}
+                        date={o.createdAt}
+                        total={o.billdata.total}
+                        address={o.shipaddress.address}
+                        orderid={o.id}
+                        quantity={o.list.items.length}
+                        subtotal={o.billdata.subTotal}
+                      />
+                    ))}
                 </div>
+                {userData && issueorders.length === 0 && (
+                  <p style={{ color: "#fff", backgroundColor: "#fff" }}>
+                    {" "}
+                    NO ORDERS WITH ISSUES
+                  </p>
+                )}
               </div>
             )}
           </div>

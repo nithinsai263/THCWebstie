@@ -12,7 +12,7 @@ import AdminPopup from "../../components/Popup";
 import PopupOrder from "../../components/PopupOrder";
 import Invoice from "../../components/Invoice";
 import styles from "./index.module.css";
-import {getUser} from "../../src/graphql/queries";
+import {getUser, getOrder} from "../../src/graphql/queries";
 
 const data = [
   {
@@ -21,7 +21,7 @@ const data = [
     date: "26th Aug",
   },
   {
-    status: true,
+    status: false,
     label: "Dispatched",
     date: "27th Aug",
   },
@@ -38,16 +38,27 @@ function MyOrdersId() {
   const [productquality, setProductQuality]=useState(false);  
   const [anotherproduct,setAnotherProduct]=useState(false);
   const [userData, setUserData] = useState(null);
+  const [orderData, setOrderData]= useState(null);
+  const [orderNavigationData, setOrderNavigationData]=useState([]);
+  const [width, setWidth]=useState('0vw');
   const [index, setIndex]=useState(-1);
 
   useEffect(() => {
     if (router.asPath !== router.route) {
       async function fetchingOrderDetails(){
-        const orderid=router.query.id;
+        const orderid=String(router.query.id);
+        const ordertemp=await API.graphql(
+            graphqlOperation(getOrder,{id:orderid})
+          );
+          console.log(ordertemp);
+          setOrderData(ordertemp.data.getOrder);
+          filterNavigatorData(ordertemp.data.getOrder.orderstatus);
+          
         try{
           let user = await Auth.currentAuthenticatedUser();
           const userid = user.attributes.sub;
           console.log(user);
+
           const userdata = await API.graphql(
             graphqlOperation(getUser, { id: userid })
           );
@@ -66,7 +77,38 @@ function MyOrdersId() {
       }
       fetchingOrderDetails();
     }
+    return function cleanup() {
+      setOrderNavigationData([]);
+    }
   }, [router]);
+
+
+  // OrderNavigator Data Filtering
+  function filterNavigatorData(orderstatus){
+    var tempAccepted={
+      status: orderstatus.accepted,
+      label: "Ordered",
+      date: orderstatus.accepted?orderstatus.dateaccepted.substring(0, 10):"---"
+    };
+    var tempDispatched={
+      status: orderstatus.dispatched,
+      label: "Dispatched",
+      date: orderstatus.dispatched?orderstatus.datedispatched.substring(0, 10):"---"
+    };
+    var tempDelivered={
+      status: orderstatus.delivered,
+      label: "Delivered",
+      date: orderstatus.delivered?orderstatus.datedelivered.substring(0, 10):"---"
+    };
+    //calculating width
+    var width= orderstatus.accepted?orderstatus.dispatched?orderstatus.delivered?'100vw':'70vw':'25vw':'25vw';
+    setWidth(width);
+  
+    //pushing data in array
+    setOrderNavigationData(prevState => [...prevState, tempAccepted]);
+    setOrderNavigationData(prevState => [...prevState, tempDispatched]);
+    setOrderNavigationData(prevState => [...prevState, tempDelivered]);
+  };
 
   return (
     <>
@@ -94,7 +136,9 @@ function MyOrdersId() {
           <h4 style={{ margin: 6 }}> Order Timeline</h4>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <OrderNavigator data={data} width={"70vw"} />
+          {orderNavigationData &&
+            <OrderNavigator data={orderNavigationData} width={width} />
+          }
         </div>
         <div
           style={{
@@ -152,9 +196,9 @@ function MyOrdersId() {
             <h4 style={{ margin: 6 }}> Ordered Items</h4>
           </div>
         </div>
-        { userData && index!==-1 && userData.orders.items[0].list.items.map((oi, index)=>(
+        { userData && index!==-1 && userData.orders.items[0].list.items.map((oi, id)=>(
         <div key={index} style={{ display: "flex", justifyContent: "center" }}>
-          <InnerOrderCard />
+          <InnerOrderCard key={id} name={oi.product.name} size={oi.size} price={oi.price} quantity={oi.quantity}/>
         </div>
         ))}
         <div
@@ -244,7 +288,7 @@ function MyOrdersId() {
                   padding: 0,
                 }}
               >
-                - Rs {userData.orders.items[index].billdata.discount}
+                - Rs {userData.orders.items[index].billdata.discount!==''?userData.orders.items[index].billdata.discount:'0'}
               </p>
             </div>
             
@@ -403,5 +447,5 @@ function MyOrdersId() {
     </>
   );
 }
-
 export default MyOrdersId;
+

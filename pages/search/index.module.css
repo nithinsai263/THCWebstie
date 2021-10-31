@@ -1,0 +1,6 @@
+.thehomiecompanyHomeContainer {
+    min-height: 100vh;
+    background-color: black;
+    overflow-y: scroll;
+    margin: 0;
+  }

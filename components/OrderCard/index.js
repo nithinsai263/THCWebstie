@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";  
+import { Storage } from "aws-amplify";
 
 import styles from "./index.module.css";
-import Button from "../Button";
-import OrderNavigator from "../OrderNavigator";
 const data = [
   {
     status: true,
@@ -38,10 +36,22 @@ const orderditems = [
     price: "69",
   },
 ];
-export default function OrderCard({date, total, address, orderid, quantity, subtotal}) {
+export default function OrderCard({date, total, address, orderid, quantity, subtotal, picture}) {
   const [details, setDetails] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [image, setImage] = useState();
 
+  useEffect(() => {
+    if (picture) {
+      getImage(picture.name);
+    }
+  }, []);
+
+  const getImage = async (pi) => {
+    Storage.get(pi).then((res) => {
+      setImage(res);
+    });
+  };
   return (
     <div
       style={{
@@ -68,7 +78,7 @@ export default function OrderCard({date, total, address, orderid, quantity, subt
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
             className={styles.thcordercardimagewrapper}
-            src={orderditems[currentIndex].prodimage}
+            src={picture ? image : "/tshirt.png"}
           />
           <div className={styles.orderCardTextWrapper}>
             {" "}

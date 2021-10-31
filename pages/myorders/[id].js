@@ -13,6 +13,7 @@ import PopupOrder from "../../components/PopupOrder";
 import Invoice from "../../components/Invoice";
 import styles from "./index.module.css";
 import {getUser, getOrder} from "../../src/graphql/queries";
+import { createIssue, updateOrderItem } from "../../src/graphql/mutations";
 
 const data = [
   {
@@ -37,12 +38,18 @@ function MyOrdersId() {
   const [sizeissue, setSizeIssue]=useState(false);
   const [productquality, setProductQuality]=useState(false);  
   const [anotherproduct,setAnotherProduct]=useState(false);
+  const [exchange, setExchange]=useState(false);
+  const [refund, setRefund]=useState(false);
   const [userData, setUserData] = useState(null);
   const [orderData, setOrderData]= useState(null);
   const [orderNavigationData, setOrderNavigationData]=useState([]);
   const [width, setWidth]=useState('0vw');
   const [index, setIndex]=useState(-1);
+  const [issueorderitems, setIssueOrderItems]=useState([]);
+  const [deliveredstatus, setDeliveredStatus]=useState();
+  const [issueresortedstatus, setIssueResortedStatus]=useState();
 
+  let date = new Date();
   useEffect(() => {
     if (router.asPath !== router.route) {
       async function fetchingOrderDetails(){
@@ -52,7 +59,7 @@ function MyOrdersId() {
           );
           console.log(ordertemp);
           setOrderData(ordertemp.data.getOrder);
-          filterNavigatorData(ordertemp.data.getOrder.orderstatus);
+          filterNavigatorData(ordertemp.data.getOrder);
           
         try{
           let user = await Auth.currentAuthenticatedUser();
@@ -84,30 +91,77 @@ function MyOrdersId() {
 
 
   // OrderNavigator Data Filtering
-  function filterNavigatorData(orderstatus){
+  function filterNavigatorData(order){
     var tempAccepted={
-      status: orderstatus.accepted,
+      status: order.orderstatus.accepted,
       label: "Ordered",
-      date: orderstatus.accepted?orderstatus.dateaccepted.substring(0, 10):"---"
+      date: order.orderstatus.accepted?order.orderstatus.dateaccepted.substring(0, 10):"---"
     };
     var tempDispatched={
-      status: orderstatus.dispatched,
+      status: order.orderstatus.dispatched,
       label: "Dispatched",
-      date: orderstatus.dispatched?orderstatus.datedispatched.substring(0, 10):"---"
+      date: order.orderstatus.dispatched?order.orderstatus.datedispatched.substring(0, 10):"---"
     };
     var tempDelivered={
-      status: orderstatus.delivered,
+      status: order.orderstatus.delivered,
       label: "Delivered",
-      date: orderstatus.delivered?orderstatus.datedelivered.substring(0, 10):"---"
+      date: order.orderstatus.delivered?order.orderstatus.datedelivered.substring(0, 10):"---"
     };
     //calculating width
-    var width= orderstatus.accepted?orderstatus.dispatched?orderstatus.delivered?'100vw':'70vw':'25vw':'25vw';
+    var width= order.orderstatus.accepted?order.orderstatus.dispatched?order.orderstatus.delivered?'100vw':'70vw':'25vw':'25vw';
     setWidth(width);
   
     //pushing data in array
     setOrderNavigationData(prevState => [...prevState, tempAccepted]);
     setOrderNavigationData(prevState => [...prevState, tempDispatched]);
     setOrderNavigationData(prevState => [...prevState, tempDelivered]);
+    setDeliveredStatus(order.orderstatus.delivered);
+    setIssueResortedStatus(false);
+    var issue_items=order.list.items.filter((i)=>(i.issue!==null));
+    if(issue_items.length>0){
+      var tempRaised={
+        status: issue_items[0].issue.status.issueraised,
+        label:"Issue Raised",
+        date: issue_items[0].issue.status.issueraised?issue_items[0].issue.status.dateissueraised.substring(0, 10):"---"
+      }
+      var tempResorted={
+        status: issue_items[0].issue.status.issueresorted,
+        label:"Resorted",
+        date: issue_items[0].issue.status.issueresorted?issue_items[0].issue.status.dateissueresorted.substring(0, 10):"---"
+      }
+      setOrderNavigationData(prevState => [...prevState, tempRaised]);
+      setOrderNavigationData(prevState => [...prevState, tempResorted]);
+      setIssueResortedStatus(issue_items[0].issue.status.issueresorted);
+    }    
+  };
+
+
+  async function handleSubmit(){
+    var issue={
+      category:sizeissue?"size":productquality?"quality":"another product",
+      subcategory:exchange?"exchange":"refund",
+      status:{
+        issueraised:true,
+        dateissueraised:date.toISOString(),
+      }
+    }
+
+    const res = await API.graphql(
+      graphqlOperation(createIssue, {
+        input: issue,
+      })
+    );
+
+    issueorderitems.map(async(id)=>{
+      const updateOrderI={
+        orderItemIssueId:res.data.createIssue.id,
+        id: id
+      }
+      await API.graphql(
+        graphqlOperation(updateOrderItem, { input: updateOrderI})
+      );
+    });
+    settrigger(5);
   };
 
   return (
@@ -175,11 +229,13 @@ function MyOrdersId() {
                 <p>Invoice</p>
               </div>
              </Invoice> 
+             {  !issueresortedstatus && deliveredstatus &&  
               <div onClick={()=>{settrigger(2)}}>
                   <div className={styles.myorderdetailcardbutton}>
                     <p>Issues</p>
                   </div>
               </div>
+             }
             </div>
           </div>
         </div>
@@ -197,8 +253,8 @@ function MyOrdersId() {
           </div>
         </div>
         { userData && index!==-1 && userData.orders.items[0].list.items.map((oi, id)=>(
-        <div key={index} style={{ display: "flex", justifyContent: "center" }}>
-          <InnerOrderCard key={id} name={oi.product.name} size={oi.size} price={oi.price} quantity={oi.quantity}/>
+        <div key={id} style={{ display: "flex", justifyContent: "center" }}>
+          <InnerOrderCard name={oi.product.name} size={oi.size} price={oi.price} quantity={oi.quantity} picture={oi.product.picture.items[0]}/>
         </div>
         ))}
         <div
@@ -322,8 +378,10 @@ function MyOrdersId() {
             <div style={{backgroundColor:"#111", display:'flex', justifyContent:'center', alignItems:"center"}}>
                 <h4>Ordered Items</h4>
             </div>
-            <PopupOrder user={true} flag={true}/>
-            <PopupOrder user={true} flag={true}/>
+            { userData && index!==-1 && userData.orders.items[0].list.items.map((oi, id)=>(
+              <PopupOrder key={id} name={oi.product.name} size={oi.size} price={oi.price} quantity={oi.quantity} picture={oi.product.picture.items[0]} user={true} flag={true} setIssueOrderItems={setIssueOrderItems} id={oi.id}/>
+            ))}
+            
             <div style={{backgroundColor:"#000", display:'flex', justifyContent:'flex-end', alignItems:"center", borderTop:"1px solid #ddd"}}>
               <h4 onClick={()=>{settrigger(3)}} style={{cursor:"pointer"}}>Raise Issue</h4>
             </div>
@@ -386,7 +444,7 @@ function MyOrdersId() {
           </div>
         </AdminPopup>
       )}
-      {trigger===4 &&(
+      {trigger === 4 &&(
      <AdminPopup trigger={true} setTrigger={settrigger}>
           <div style={{color:"#fff"}}>
             <div style={{backgroundColor:"#111", display:'flex', justifyContent:'center', alignItems:"center"}}>
@@ -397,26 +455,24 @@ function MyOrdersId() {
                 <div style={{display:'flex', alignItems:'center',  width:200}}>
                     <Radio
                       style={{color:"#aaa", marginTop:7}}
-                      checked={sizeissue}
+                      checked={exchange}
                       onChange={(e) => {
-                      setAnotherProduct(false);
-                      setProductQuality(false);
-                      setSizeIssue(!sizeissue);
+                      setRefund(false);
+                      setExchange(!exchange);
                       }}
-                        value={sizeissue}
+                        value={exchange}
                       />
                     <p style={{paddingTop:8}} className={styles.popupMessage}>Exchange</p>
                  </div>
                  <div style={{display:'flex', alignItems:'center',  width:200}}>
                     <Radio
                       style={{color:"#aaa", marginTop:7}}
-                      checked={productquality}
+                      checked={refund}
                       onChange={(e) => {
-                      setSizeIssue(false);
-                      setAnotherProduct(false);
-                      setProductQuality(!productquality);
+                        setRefund(!refund);
+                        setExchange(false);
                       }}
-                        value={productquality}
+                        value={refund}
                       />
                     <p style={{paddingTop:8}} className={styles.popupMessage}>Refund</p>
                  </div>
@@ -424,12 +480,12 @@ function MyOrdersId() {
             </div>
             <div style={{backgroundColor:"#000", display:'flex', justifyContent:'flex-end', alignItems:"center", borderTop:"1px solid #ddd"}}>
               <h4 style={{cursor:"pointer", marginRight:20}} onClick={()=>{settrigger(3)}}>Back</h4>
-              <h4 style={{cursor:"pointer", marginRight:10}} onClick={()=>{settrigger(5)}}>Next</h4>
+              <h4 style={{cursor:"pointer", marginRight:10}} onClick={()=>{handleSubmit()}}>Next</h4>
             </div>
           </div>
         </AdminPopup>
       )}
-      {trigger===5 &&(
+      {trigger === 5 &&(
      <AdminPopup trigger={true} setTrigger={settrigger}>
           <div style={{color:"#fff"}}>
             <div style={{display:"flex", justifyContent:"center"}}>

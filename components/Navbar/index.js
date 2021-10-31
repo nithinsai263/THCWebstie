@@ -37,6 +37,7 @@ export default function Navbar(props) {
   const [search, setSearch] = useState(false);
   const [searchedData, setSearchedData] = useState([]);
   const [userinput, setUserInput] = useState(null);
+  //event functions
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   //for MobileView Nav

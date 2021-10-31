@@ -49,10 +49,7 @@ export default function SizeDropDown({
           setButtonTitle(userdata.data.getUser.cart.items[index].size);
         }
       } catch (e) {
-        console.log(
-          "werjoiewjiofjeiofgkjadshgjkghkjasdhkjdahsjkgfhaskjhfjkasdhfkjadsjkf0",
-          e
-        );
+        console.log(e);
       }
     }
     fetchSizeofProduct();

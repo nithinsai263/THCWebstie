@@ -1,6 +1,6 @@
-import { Storage } from "aws-amplify";
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.css";
+import { Storage } from "aws-amplify";
 
 function Previewcomponent({ name, price, falseprice, picture, description }) {
   const [image, setImage] = useState();

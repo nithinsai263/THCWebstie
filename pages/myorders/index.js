@@ -27,14 +27,24 @@ export default function MyOrders({ history }) {
       //need to fix issue order
       setIssueOrders(
         userdata.data.getUser.orders.items
-          .map((or) => or.list.items.filter((orr) => orr.issue !== null))
-          .filter((val) => val.some((v) => true))
+          .filter((or) => {
+            if(or.list.items.filter((orr) => {
+              return orr.issue !== null
+            }).length>0){
+              return or;
+            }
+          })
       );
       console.log(
         "wassap:",
         userdata.data.getUser.orders.items
-          .map((or) => or.list.items.filter((orr) => orr.issue !== null))
-          .filter((val) => val.some((v) => true))
+          .filter((or) => {
+            if(or.list.items.filter((orr) => {
+              return orr.issue !== null
+            }).length>0){
+              return or;
+            }
+          }) 
       );
     }
     fetchingOrders();
@@ -96,6 +106,7 @@ export default function MyOrders({ history }) {
                         orderid={o.id}
                         quantity={o.list.items.length}
                         subtotal={o.billdata.subTotal}
+                        picture={o.list.items[0].product.picture.items[0]}
                       />
                     ))}
                 </div>

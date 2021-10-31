@@ -48,7 +48,7 @@ export default function OrderDetails({ setPageState, currbill, couponChecker }) 
       console.log('this is it',userData.id)
       const updatedUser={
         userShipaddressId:res.data.createAddress.id,
-        id: '37c5166b-b0b2-4c5c-b772-0066636f28c5'
+        id: userid
       }
       const userdata = await API.graphql(
         graphqlOperation(updateUser, { input: updatedUser})
